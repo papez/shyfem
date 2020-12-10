@@ -2675,6 +2675,13 @@ c*****************************************************************
 	  units = 'num km-2'
 	  cmin = 0.
 	  cmax = 50000.
+	else if( ivar .eq. 229 ) then	! s. wave height
+	  name = 'swh'
+	  what = 'long_name'
+	  std = 'significant wave height of combined wind waves and swell'
+	  units = 'm'
+	  cmin = 0.
+	  cmax = 100.
 	else
 	  write(6,*) 'unknown variable: ',ivar
 	  stop 'error stop descr_var'
