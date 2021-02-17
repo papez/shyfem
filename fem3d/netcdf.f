@@ -62,6 +62,7 @@ c 14.05.2019	ggu	wrong definition of dimensions in nc_write_data_3d_reg
 c 16.05.2019	ggu	new version of nc_rewrite_3d_reg(), new nc_set_quiet()
 c 08.01.2020	ggu	allow for double user data
 c 29.01.2020	ggu	insert extra information for error message
+c 10.12.2020	ppz	added definitions for wave variables
 c
 c notes :
 c
@@ -2561,7 +2562,7 @@ c*****************************************************************
 	end if
 
 	end
-	
+
 c*****************************************************************
 c*****************************************************************
 c variable initialization
@@ -2675,13 +2676,42 @@ c*****************************************************************
 	  units = 'num km-2'
 	  cmin = 0.
 	  cmax = 50000.
-	else if( ivar .eq. 229 ) then	! s. wave height
+	else if( ivar .eq. 229 ) then	! significant wave height
 	  name = 'swh'
 	  what = 'long_name'
-	  std = 'significant wave height of combined wind waves and swell'
+	  std = 'significant wave height of combined '//
+     +          'wind waves and swell'
 	  units = 'm'
 	  cmin = 0.
 	  cmax = 100.
+	else if( ivar .eq. 103 ) then	! U wave-ocean momentum flux
+	  name = 'utauwo'
+	  what = 'long_name'
+	  std = 'U-component of wave to ocean stress'
+	  units = 'm2 s-2'
+	  cmin = -.1
+	  cmax = .1
+	else if( ivar .eq. 104 ) then	! V wave-ocean momentum flux
+	  name = 'vtauwo'
+	  what = 'long_name'
+	  std = 'V-component of wave to ocean stress'
+	  units = 'm2 s-2'
+	  cmin = -.1
+	  cmax = .1
+	else if( ivar .eq. 101 ) then	! U net wind-wave momentum flux
+	  name = 'utauaw'
+	  what = 'long_name'
+	  std = 'U-component of net wave supported wind stress'
+	  units = 'm2 s-2'
+	  cmin = -.1
+	  cmax = .1
+	else if( ivar .eq. 102 ) then	! V net wind-wave momentum flux
+	  name = 'vtauaw'
+	  what = 'long_name'
+	  std = 'V-component of net wave supported wind stress'
+	  units = 'm2 s-2'
+	  cmin = -.1
+	  cmax = .1
 	else
 	  write(6,*) 'unknown variable: ',ivar
 	  stop 'error stop descr_var'
